@@ -3,6 +3,7 @@
  */
 package edu.bu.jsonl;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -18,14 +19,17 @@ public class Client {
 	public static void main(String[] args) throws InterruptedException {
 		// The fake system time object.
 		FakeTime fakeTime = FakeTime.getInstance();
-		// Set fake time to 9:30am;
-		fakeTime.setTime(34200);
-		
+		// Set fake time to 9:00am;
+		fakeTime.setTime(32400);
 		// Set fake time to 4:00pm;
 		// fakeTime.setTime(57600);
 		
-		fakeTime.setLapse(30);
+		fakeTime.setLapse(60);
 		fakeTime.setInterval(500);
+
+		// Agent must be initialize before clock start ticking...
+		Agent agent = new Agent();
+		fakeTime.addObserver(agent);
 		
 		// Detach fake clock from main thread.
 		Thread tick = new Thread(fakeTime);
@@ -35,12 +39,13 @@ public class Client {
         /*
         while(fakeTime.getTime() < 86400) {
         	Thread.sleep(500);
-        	System.out.println("Time is:" + fakeTime.getTime() +  ", " +intToTimeStr(fakeTime.getTime()));
+        	System.out.println("Time is:" + fakeTime.getTimeStr());
         	
-        }
-        */
+        }*/
+        
+        
         StockTrade stockTrade = new StockTrade();
-        Agent agent = new Agent();
+        
         
         
         // Now, I should make a infinity loop to receive user input and place order...
@@ -55,7 +60,7 @@ public class Client {
         	System.out.println("Please input operation: (b)uy or (s)ell or (e)xit");
         	command  = reader.nextLine().toLowerCase();
         	System.out.println("Your command:" + command);
-        	boolean endMe = false;
+        	boolean endMe = false, wrongCmd = false;
         	Order order = null;
         	switch(command) {
         	case "e":
@@ -75,8 +80,15 @@ public class Client {
         		System.out.println("Enter stock symbol:");
             	symbol = reader.nextLine();
             	System.out.println("Enter amount");
-            	amount = reader.nextInt();
+            	try {
+            		amount = reader.nextInt();
+            	} catch (Exception e) {
+            		amount = 0;
+            	}
         		order = new SellStockOrder(stockTrade, new OrderDetail(symbol, amount));
+        		break;
+        	default:
+        		wrongCmd = true;
         		break;
         	}
         	
@@ -84,8 +96,10 @@ public class Client {
         		reader.close();
         		break;
         	}
-        	System.out.println(fakeTime.getTimeStr() + " order placed...");
-        	agent.placeOrder(order);
+        	if(!wrongCmd) {
+        		System.out.println(fakeTime.getTimeStr() + " order placed...");
+        		agent.placeOrder(order);
+        	}
         }
         
         System.out.println("Program ended... Good bye.");

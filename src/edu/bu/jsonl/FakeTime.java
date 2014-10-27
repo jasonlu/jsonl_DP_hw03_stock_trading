@@ -5,13 +5,14 @@ package edu.bu.jsonl;
 
 import java.util.Formatter;
 import java.util.Locale;
+import java.util.Observable;
 
 /**
  * @author Jason Lu
  * The singleton class to store fake system time.
  *
  */
-public class FakeTime implements Runnable {
+public class FakeTime extends Observable implements Runnable {
 	
 	private static FakeTime self;
 	
@@ -52,9 +53,24 @@ public class FakeTime implements Runnable {
 	}
 	
 	public void run() {
+		if(this.ticking) {
+			return;
+		}
+		this.ticking = true;
 		self = getInstance();
+		boolean notified = false;
+		//this.time = 34100;
 		while(!this.stop) {
+			
 			self.addTime(lapse);
+			
+			if(this.time >= 34200 && !notified) {
+				setChanged();
+				notifyObservers();
+				notified = true;
+			} else if(this.time >= 57600) {
+				notified = false;
+			}
 			try {
 				Thread.sleep(interval);
 				
@@ -67,6 +83,7 @@ public class FakeTime implements Runnable {
 	
 	public void stop() {
 		this.stop = true;
+		this.ticking = false;
 	}
 	
 	public static synchronized FakeTime getInstance() {
