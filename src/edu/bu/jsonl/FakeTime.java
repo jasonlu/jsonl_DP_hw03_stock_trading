@@ -37,17 +37,18 @@ public class FakeTime implements Runnable {
 	 */
 	private int interval;
 
-	private boolean stop;
+	private boolean stop, ticking;
 	
 	/**
 	 * 
 	 */
 	private FakeTime() {
 		// 0: 00:00:00
-		time = 0;
-		lapse = 30;
-		interval = 10;
+		this.time = 0;
+		this.lapse = 30;
+		this.interval = 10;
 		this.stop = false;
+		this.ticking = false;
 	}
 	
 	public void run() {
@@ -68,7 +69,7 @@ public class FakeTime implements Runnable {
 		this.stop = true;
 	}
 	
-	public static FakeTime getInstance() {
+	public static synchronized FakeTime getInstance() {
 		if(self == null) {
 			self = new FakeTime();
 		}

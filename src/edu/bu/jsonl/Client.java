@@ -22,7 +22,7 @@ public class Client {
 		fakeTime.setTime(34200);
 		
 		// Set fake time to 4:00pm;
-		fakeTime.setTime(57600);
+		// fakeTime.setTime(57600);
 		
 		fakeTime.setLapse(30);
 		fakeTime.setInterval(500);
@@ -53,28 +53,25 @@ public class Client {
         	command = "";
         	Scanner reader = new Scanner(System.in);
         	System.out.println("Please input operation: (b)uy or (s)ell or (e)xit");
-        	command  = reader.nextLine();
+        	command  = reader.nextLine().toLowerCase();
         	System.out.println("Your command:" + command);
         	boolean endMe = false;
         	Order order = null;
         	switch(command) {
         	case "e":
-        	case "E":
         		fakeTime.stop();
         		tick.join();
         		endMe = true;
         		break;
         		
         	case "b":
-        	case "B":
         		System.out.println("Enter stock symbol:");
-            	symbol = reader.nextLine();
+            	symbol = reader.nextLine().toUpperCase();
             	System.out.println("Enter amount");
             	amount = reader.nextInt();
         		order = new BuyStockOrder(stockTrade, new OrderDetail(symbol, amount));
         		break;
-        	case "s":        		
-        	case "S":
+        	case "s":
         		System.out.println("Enter stock symbol:");
             	symbol = reader.nextLine();
             	System.out.println("Enter amount");
