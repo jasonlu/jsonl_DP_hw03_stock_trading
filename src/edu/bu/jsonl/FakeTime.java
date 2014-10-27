@@ -64,11 +64,14 @@ public class FakeTime extends Observable implements Runnable {
 			
 			self.addTime(lapse);
 			
-			if(this.time >= 34200 && !notified) {
-				setChanged();
-				notifyObservers();
-				notified = true;
-			} else if(this.time >= 57600) {
+			if((this.time >= 34200 && this.time < 57600)) {
+				if(!notified) {
+					setChanged();
+					notifyObservers();
+					notified = true;
+					clearChanged();
+				}
+			} else {
 				notified = false;
 			}
 			try {

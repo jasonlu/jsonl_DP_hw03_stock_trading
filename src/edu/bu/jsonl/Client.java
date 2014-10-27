@@ -3,7 +3,6 @@
  */
 package edu.bu.jsonl;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -21,15 +20,20 @@ public class Client {
 		FakeTime fakeTime = FakeTime.getInstance();
 		// Set fake time to 9:00am;
 		fakeTime.setTime(32400);
-		// Set fake time to 4:00pm;
-		// fakeTime.setTime(57600);
 		
-		fakeTime.setLapse(60);
+		// Each tick lapse 120 seconds (2 minutes)
+		fakeTime.setLapse(120);
+		// Tick interval: 0.5 second (real time)
 		fakeTime.setInterval(500);
+		// Therefore, 1 real second == 4 simulation minutes
 
-		// Agent must be initialize before clock start ticking...
+		// Agent must be initialize before clock start ticking.
 		Agent agent = new Agent();
+		// Because agent is the observer of fakeTime.
 		fakeTime.addObserver(agent);
+		
+		// Initialize our stack trade center.
+		StockTrade stockTrade = new StockTrade();
 		
 		// Detach fake clock from main thread.
 		Thread tick = new Thread(fakeTime);
@@ -37,16 +41,15 @@ public class Client {
         tick.start();
         
         /*
+         *  Debug block
+         */
+        /*
         while(fakeTime.getTime() < 86400) {
         	Thread.sleep(500);
         	System.out.println("Time is:" + fakeTime.getTimeStr());
         	
-        }*/
-        
-        
-        StockTrade stockTrade = new StockTrade();
-        
-        
+        }
+        */
         
         // Now, I should make a infinity loop to receive user input and place order...
         String symbol = null, command = null;
@@ -104,7 +107,7 @@ public class Client {
         
         System.out.println("Program ended... Good bye.");
 		
-        // Exception
+        // This will be Exception
         // SellStockOrder sellOrderWrong = new SellStockOrder (stockTrade, new OrderDetail("GOOG", 0));
     }
 	
