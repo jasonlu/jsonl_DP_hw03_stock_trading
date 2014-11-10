@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="edu.bu.jsonl.FakeTime" project="jsonl_DP_hw03_stock_trading" 
     file="/jsonl_DP_hw03_stock_trading/src/edu/bu/jsonl/FakeTime.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="790" y="212"/>    
+    <position height="-1" width="-1" x="807" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,61 +75,61 @@
   </class>  
   <class id="9" language="java" name="edu.bu.jsonl.WrongOrderException" project="jsonl_DP_hw03_stock_trading" 
     file="/jsonl_DP_hw03_stock_trading/src/edu/bu/jsonl/WrongOrderException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="524" y="422"/>    
+    <position height="-1" width="-1" x="352" y="464"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="10">    
+  <realization id="10">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="11">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="12" name="self"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="11" name="m_ordersQueue"/>      
-      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
+      <attribute id="15" name="m_fakeTime"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="17">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <association id="18">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="19" name="m_stockTrade"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="22" name="m_ordersQueue"/>      
+      <multiplicity id="23" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="13">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="14" name="m_stockTrade"/>      
-      <multiplicity id="15" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="16">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="17" name="self"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="19">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <association id="20">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="21" name="m_fakeTime"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
+  <association id="24">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="24" name="m_stockTrade"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+      <attribute id="25" name="m_stockTrade"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="26">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
